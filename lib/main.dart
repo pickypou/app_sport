@@ -1,115 +1,170 @@
+import 'package:app_sport/signupPage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const MyApp());
+
+import 'loginPage.dart';
+
+
+void main(){
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title:'Mon coach sportif',
+    home: HomePage(),
+  ),
+  );
 }
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class HomePage extends StatelessWidget{
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+  return Scaffold(
+    body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            Colors.blue.shade200,
+            Colors.blueAccent.shade700,
+            Colors.blue.shade900
+          ]
+        ),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      child: Center(
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+          children: [
+            titleSection,
+            imageSection,
+            textSection,
+            const ButtonInscription(),
+            const SizedBox(height: 20,),
+            const ButtonConnexion(),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    ),
+  );
   }
 }
+Widget titleSection = Container(
+  margin: const EdgeInsets.fromLTRB(0, 20, 0, 25),
+  child:  Text('Mon coach sportif', style: GoogleFonts.exo(
+    fontSize: 30,
+    fontWeight: FontWeight.w900,
+    color: Colors.white,
+  ),),
+);
+
+Widget imageSection = Container(
+  height: 220,
+  width: 220,
+  padding: const EdgeInsets.all(30),
+ decoration: BoxDecoration(
+   color: const Color.fromRGBO(255, 255, 255, 0.1),
+   borderRadius: BorderRadius.circular(50),
+ ),
+  child: Container(
+    padding: const EdgeInsets.all(10),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.1),
+          spreadRadius: 5,
+          blurRadius: 15,
+          offset: const Offset(0, 3)
+        ),
+      ],
+    ),
+    child: Image.network(
+      'https://cdn.shopify.com/s/files/1/0584/9586/0895/products/planche2_600x.png?v=1637442089'
+    ),
+  ),
+
+);
+Widget textSection = Container(
+  margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+  child: Text('''
+  la planche à pompes vous permer
+   de faire diférent exercices pour
+    travailler le haut du corps
+    
+    -Epaule
+    
+    -Triceps
+    
+    -Dos
+    
+    -potrine
+  ''',
+    softWrap: true,
+    style: GoogleFonts.comfortaa(
+    fontSize: 16,
+    color: Colors.white
+  ),),
+);
+
+class ButtonInscription extends StatelessWidget{
+  const ButtonInscription({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        padding: const EdgeInsets.fromLTRB(110, 15, 110, 15),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+        ),
+      ),
+      child: Text(
+        "Inscription".toUpperCase(),
+        style: const TextStyle(
+          color: Colors.blue,
+          fontSize: 20.0,
+        ),
+      ),
+      onPressed: (){
+        Navigator.push(context,
+            MaterialPageRoute(builder:(context) => const SignupPage()),
+        );
+      },
+    );
+  }
+  
+}
+
+class ButtonConnexion extends StatelessWidget{
+  const ButtonConnexion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        padding: const EdgeInsets.fromLTRB(110, 15, 110, 15),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+        ),
+      ),
+      child: Text(
+        "connexion".toUpperCase(),
+        style: const TextStyle(
+          color: Colors.blue,
+          fontSize: 20.0,
+        ),
+      ),
+      onPressed: (){
+        Navigator.push(context,
+          MaterialPageRoute(builder:(context) => const LoginPage()),
+        );
+      },
+    );
+  }
+
+}
+
